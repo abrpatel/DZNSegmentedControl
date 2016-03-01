@@ -60,6 +60,8 @@ enum {
 @property (nonatomic) BOOL adjustsButtonTopInset;
 /** YES if the selected segment is user interaction disabled. NO if touching the segment button should still forward the actions to its targets without animating the selection indicator. Default is YES. */
 @property (nonatomic) BOOL disableSelectedSegment;
+/** YES if the segmented control should have had their left and right segment aligned to the left and right edges of the control. NO if the left and right segment should be centered. Default is NO. */
+@property (nonatomic) BOOL alignSegmentToEdge;
 
 /**
  Initializes and returns a segmented control with segments having the given titles or images.

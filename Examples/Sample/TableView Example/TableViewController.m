@@ -88,6 +88,7 @@
         _control.selectedSegmentIndex = 1;
         _control.bouncySelectionIndicator = NO;
         _control.height = 60.0f;
+        _control.alignSegmentToEdge = YES;
         
 //                _control.height = 120.0f;
 //                _control.width = 300.0f;

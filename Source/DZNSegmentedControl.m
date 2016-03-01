@@ -145,6 +145,21 @@
         if (idx == self.selectedSegmentIndex) {
             button.selected = YES;
         }
+        
+        if (self.alignSegmentToEdge) {
+            if (idx == 0) {
+                button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+            }
+            else if (idx == ([[self buttons] count] - 1)) {
+                button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+            }
+            else {
+                button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            }
+        }
+        else {
+            button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        }
     }];
     
     [self configureAccessoryViews];
@@ -313,6 +328,8 @@
         frame.origin.y = (self.barPosition > UIBarPositionBottom) ? 0.0f : appropriateY;
     }
     
+    NSUInteger index = [[self buttons] indexOfObject:button];
+    
     if (self.autoAdjustSelectionIndicatorWidth) {
         
         NSAttributedString *attributedString = [button attributedTitleForState:UIControlStateSelected];
@@ -325,7 +342,21 @@
         }
         
         frame.size = CGSizeMake(width, self.selectionIndicatorHeight);
-        frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width)/2;
+        
+        if (self.alignSegmentToEdge) {
+            if (index == 0) {
+                frame.origin.x = 0;
+            }
+            else if (index == ([[self buttons] count] - 1)) {
+                frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width);
+            }
+            else {
+                frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width)/2;
+            }
+        }
+        else {
+            frame.origin.x = (button.frame.size.width*(self.selectedSegmentIndex))+(button.frame.size.width-frame.size.width)/2;
+        }
     }
     else {
         frame.size = CGSizeMake(button.frame.size.width, self.selectionIndicatorHeight);
